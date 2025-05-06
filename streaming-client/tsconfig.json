@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -9,7 +10,25 @@
     "sourceMap": true,
     "baseUrl": ".",
     "outDir": "dist",
-    "moduleResolution": "node",
-    "resolveJsonModule": true
-  }
+    "resolveJsonModule": true,
+    "composite": true,
+    "strict": true,
+    "tsBuildInfoFile": "./dist/tsconfig.main.tsbuildinfo"
+  },
+  "paths": {
+    "@/*": ["./*"],
+    "@main/*": ["./src/main/*"],
+    "@renderer/*": ["./src/renderer/*"]
+  },
+  "include": ["src/renderer/**/*"],
+  "references": [{"path": "./src/renderer"}],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "*.config.ts",
+    "*.config.js",
+    "*.config.mjs",
+    "src/main",
+    "src/preload"
+  ]
 }
