@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, desktopCapturer } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
 
@@ -27,7 +27,7 @@ const createWindow = () => {
   }
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -57,8 +57,13 @@ app.on("activate", () => {
 
 app
   .whenReady()
-  .then(() => {
+  .then(async () => {
     console.log("Hello World!!!!");
+    const sources = await desktopCapturer.getSources({
+      types: ["screen"],
+    });
+
+    console.log(sources);
   })
   .catch((err) => {
     console.log("Err:", err);
